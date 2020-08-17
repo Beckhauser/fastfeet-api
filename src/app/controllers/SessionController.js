@@ -4,7 +4,7 @@ import authConfig from '../../config/auth';
 import User from '../models/User';
 
 class SessionController {
-  async store(req, res) {
+  async createNewSession(req, res) {
     const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email } });
@@ -24,7 +24,7 @@ class SessionController {
         id,
         name,
       },
-      tokenn: jwt.sign({ id }, authConfig.secret, {
+      token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       }),
     });
