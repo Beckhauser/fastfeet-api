@@ -2,15 +2,21 @@ import * as Yup from 'yup';
 import Recipient from '../models/Recipient';
 
 class RecipientController {
-  async store(req, res) {
+  async listAllRecipients(req, res) {
+    const recipient = Recipient.findAll();
+
+    return res.json(recipient);
+  }
+
+  async createRecipient(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required,
-      street: Yup.string().required,
-      number: Yup.string().required,
+      name: Yup.string().required(),
+      street: Yup.string().required(),
+      number: Yup.string().required(),
       complement: Yup.string(),
-      state: Yup.string().required,
-      city: Yup.string().required,
-      zip_code: Yup.string().required,
+      state: Yup.string().required(),
+      city: Yup.string().required(),
+      zip_code: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -33,7 +39,7 @@ class RecipientController {
       state,
       city,
       zip_code,
-    } = Recipient.create(req.body);
+    } = await Recipient.create(req.body);
 
     return res.json({
       message: 'ok',
@@ -47,7 +53,7 @@ class RecipientController {
     });
   }
 
-  async update(req, res) {
+  async updateRecipient(req, res) {
     const schema = Yup.object().shape({
       id: Yup.number().positive().required(),
       name: Yup.string(),
@@ -65,7 +71,7 @@ class RecipientController {
     const { id } = req.body;
     const recipient = await Recipient.findByPk(id);
 
-    const { name, street } = await recipient.update(req.body);
+    await recipient.update(req.body);
 
     return res.json({ message: 'Recipient updated', recipient });
   }
