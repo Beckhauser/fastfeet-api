@@ -1,6 +1,6 @@
 # README.md
 
-![](tmp/logo.png)
+![](logo.png)
 
 ### **Express Application for FastFeet project**
 
