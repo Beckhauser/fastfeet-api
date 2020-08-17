@@ -1,6 +1,6 @@
 # README.md
 
-![](logo.png)
+<div style="text-align:center"><img src="logo.png" /></div>
 
 ### **Express Application for FastFeet project**
 
