@@ -1,7 +1,10 @@
 import * as Yup from 'yup';
 import Delivery from '../models/Delivery';
-import Mail from '../../lib/Mail';
 import Deliveryman from '../models/Deliveryman';
+import Recipient from '../models/Recipient';
+
+import Queue from '../../lib/Queue';
+import NewDeliveryMail from '../jobs/NewDeliveryMail';
 
 class DeliveryController {
   async listAllDelivery(req, res) {
@@ -23,15 +26,23 @@ class DeliveryController {
 
     const delivery = await Delivery.create(req.body);
 
-    const { name, email } = await Deliveryman.findByPk(delivery.deliveryman_id);
-
-    await Mail.sendMail({
-      to: `${name} <${email}>`,
-      subject: 'Nova entrega',
-      template: 'delivery',
-      context: {
-        deliveryman: name,
-      },
+    await delivery.reload({
+      attributes: ['id', 'product'],
+      include: [
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name'],
+        },
+      ],
+    });
+    await Queue.add(NewDeliveryMail.key, {
+      delivery,
     });
 
     return res.json(delivery);
