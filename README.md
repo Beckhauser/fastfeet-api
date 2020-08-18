@@ -1,10 +1,20 @@
 # README.md
 
-<div style="text-align:center"><img src="logo.png" /></div>
+<h1 align="center"><img src="logo.png" alt="fastfeet-logo" width="250px"/></h1>
 
-### **Express Application for FastFeet project**
+<h3 align="center">
+  Express Application for FastFeet project
+</h3>
 
-A fast way to manage delivery companies!
+<p align="center">
+  A fast way to manage delivery companies!
+</p>
+
+<p id="insomniaButton" align="center">
+  <a href="https://insomnia.rest/" target="_blank">
+    <img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia">
+  </a>
+</p>
 
 ## **📚 About the project**
 
@@ -45,25 +55,28 @@ Import the `Insomnia.json` on Insomnia App
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 **Clone the project and access the folder**
-
+```bash
 $ git clone https://github.com/Beckhauser/fastfeet-api && cd fastfeet-api
+```
 
 **Follow the steps below**
 
+```bash
 # Install the dependencies
 $ npm install
 # Make a copy of '.env.example' to '.env'
 # and set with YOUR environment variables.
+
 # Start a postgres and redis instance
+
 # Once the services are running, run the migrations
 $ npx sequelize db:migrate
+
 # Run the seed to create the 'admin-user'
 $ npx sequelize db:seed --seed 20200521200848-admin-user.js
+
 # Well done, project is started!
-
-## **📝 License**
-
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/EliasGcf/proffy/blob/master/LICENSE) file for details.
+```
 
 ---
 
