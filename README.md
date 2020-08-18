@@ -34,6 +34,33 @@ Technologies that I used to develop this application
 - [Prettier](https://prettier.io/)
 - [EditorConfig](https://editorconfig.org/)
 
+## **💻 Getting started**
+
+Import the `Insomnia.json` on Insomnia App
+
+### **Requirements**
+
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- [Docker](https://www.docker.com/products/docker-desktop)
+
+**Clone the project and access the folder**
+
+$ git clone https://github.com/Beckhauser/fastfeet-api && cd fastfeet-api
+
+**Follow the steps below**
+
+# Install the dependencies
+$ npm install
+# Make a copy of '.env.example' to '.env'
+# and set with YOUR environment variables.
+# Start a postgres and redis instance
+# Once the services are running, run the migrations
+$ npx sequelize db:migrate
+# Run the seed to create the 'admin-user'
+$ npx sequelize db:seed --seed 20200521200848-admin-user.js
+# Well done, project is started!
+
 ## **📝 License**
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/EliasGcf/proffy/blob/master/LICENSE) file for details.
